@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { RotateCcw, Home, CheckCircle, XCircle, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { type TestResult, getPerformanceLevel, generateFeedback } from "@/lib/questions";
+import { type TestResult, getPerformanceLevel, generateFeedback } from "@/lib/questionUtils";
 
 const ResultsPage = () => {
   const navigate = useNavigate();

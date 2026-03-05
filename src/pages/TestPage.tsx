@@ -19,7 +19,7 @@ import {
   type Technology,
   type Difficulty,
   type TestResult,
-} from "@/lib/questions";
+} from "@/lib/questionUtils";
 
 const TOTAL_TIME = 60 * 60; // 60 minutes in seconds
 

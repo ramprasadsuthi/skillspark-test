@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { technologies, type Technology, type Difficulty } from "@/lib/questions";
+import { technologies, type Technology, type Difficulty } from "@/lib/questionUtils";
 
 const difficulties: { name: Difficulty; description: string; color: string }[] = [
   { name: "Beginner", description: "Fundamentals and basic concepts", color: "bg-success/10 text-success border-success/20" },
