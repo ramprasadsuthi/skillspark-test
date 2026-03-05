@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://realrishiiscool.github.io/skillspark-test",
+  "homepage": "https://ramprasadsuthi.github.io/skillspark-test",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
