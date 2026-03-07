@@ -1,4 +1,4 @@
-import { javaQuestions, pythonQuestions, manualTestingQuestions } from "./questions";
+import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions } from "./questions";
 
 export type Technology =
   | "Core Java"
@@ -35,17 +35,67 @@ export interface TestResult {
   timeTaken: number;
 }
 
-export const technologies: { name: Technology; icon: string; description: string }[] = [
-  { name: "Core Java", icon: "☕", description: "Object-oriented programming, JVM, collections, and more" },
-  { name: "Python", icon: "🐍", description: "Scripting, data structures, OOP, and libraries" },
-  { name: "Manual Testing", icon: "🔍", description: "Test cases, bug lifecycle, SDLC, and methodologies" },
-  { name: "Automation Testing", icon: "🤖", description: "Frameworks, CI/CD, test automation strategies" },
-  { name: "Selenium", icon: "🌐", description: "WebDriver, locators, waits, and frameworks" },
-  { name: "SQL", icon: "🗄️", description: "Queries, joins, normalization, and optimization" },
-  { name: "HTML", icon: "📄", description: "Elements, forms, semantics, and accessibility" },
-  { name: "CSS", icon: "🎨", description: "Layouts, flexbox, grid, animations, and responsive design" },
-  { name: "JavaScript", icon: "⚡", description: "ES6+, DOM, async programming, and closures" },
-  { name: "React", icon: "⚛️", description: "Components, hooks, state management, and routing" },
+export const technologies: { name: Technology; icon: string; description: string; background: string }[] = [
+  {
+    name: "Core Java",
+    icon: "☕",
+    description: "Object-oriented programming, JVM, collections, and more",
+    background: "linear-gradient(to right, #e0f2f7, #c1e4ee)",
+  },
+  {
+    name: "Python",
+    icon: "🐍",
+    description: "Scripting, data structures, OOP, and libraries",
+    background: "linear-gradient(to right, #d4edda, #c0e0c0)",
+  },
+  {
+    name: "Manual Testing",
+    icon: "🔍",
+    description: "Test cases, bug lifecycle, SDLC, and methodologies",
+    background: "linear-gradient(to right, #ffe0b2, #ffd599)",
+  },
+  {
+    name: "Automation Testing",
+    icon: "🤖",
+    description: "Frameworks, CI/CD, test automation strategies",
+    background: "linear-gradient(to right, #ffcdd2, #ffb3b3)",
+  },
+  {
+    name: "Selenium",
+    icon: "🌐",
+    description: "WebDriver, locators, waits, and frameworks",
+    background: "linear-gradient(to right, #e1bee7, #d0a7db)",
+  },
+  {
+    name: "SQL",
+    icon: "🗄️",
+    description: "Queries, joins, normalization, and optimization",
+    background: "linear-gradient(to right, #c8e6c9, #aed581)",
+  },
+  {
+    name: "HTML",
+    icon: "📄",
+    description: "Elements, forms, semantics, and accessibility",
+    background: "linear-gradient(to right, #bbdefb, #90caf9)",
+  },
+  {
+    name: "CSS",
+    icon: "🎨",
+    description: "Layouts, flexbox, grid, animations, and responsive design",
+    background: "linear-gradient(to right, #ffecb3, #ffe082)",
+  },
+  {
+    name: "JavaScript",
+    icon: "⚡",
+    description: "ES6+, DOM, async programming, and closures",
+    background: "linear-gradient(to right, #b2dfdb, #80cbc4)",
+  },
+  {
+    name: "React",
+    icon: "⚛️",
+    description: "Components, hooks, state management, and routing",
+    background: "linear-gradient(to right, #cfd8dc, #b0bec5)",
+  },
 ];
 
 // Mock question bank - in production these would come from AI
@@ -53,6 +103,8 @@ const questionBanks: Record<string, Question[]> = {
   ...javaQuestions,
   ...pythonQuestions,
   ...manualTestingQuestions,
+  ...automation_testingQuestions,
+  ...seleniumQuestions,
 };
 
 // Generate questions for any tech/difficulty combo by reusing and adapting the bank

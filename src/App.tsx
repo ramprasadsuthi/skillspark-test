@@ -9,6 +9,8 @@ import Index from "./pages/Index";
 import SelectTechnology from "./pages/SelectTechnology";
 import TestPage from "./pages/TestPage";
 import ResultsPage from "./pages/ResultsPage";
+import AdminPage from "./pages/AdminPage";
+import PasswordProtect from "./components/PasswordProtect";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -27,6 +29,14 @@ const App = () => (
           <Route path="/select" element={<SelectTechnology />} />
           <Route path="/test" element={<TestPage />} />
           <Route path="/results" element={<ResultsPage />} />
+          <Route
+            path="/admin"
+            element={
+              <PasswordProtect>
+                <AdminPage />
+              </PasswordProtect>
+            }
+          />
           <Route path="*" element={<NotFound />} />
         </Routes>
 

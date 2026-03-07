@@ -100,16 +100,23 @@ const TestPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-20 pb-8">
-      <div className="container mx-auto px-4 max-w-5xl">
+    <div className="min-h-screen pt-20 pb-8 relative z-0"
+      style={{
+        backgroundImage: `url('https://images.unsplash.com/photo-1542831371-d35d03893358?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}>
+      {/* Overlay to darken background image and improve text readability */}
+      <div className="absolute inset-0 bg-black/50 z-[-1]" />
+      <div className="container mx-auto px-4 max-w-5xl relative z-10">
         {/* Top bar */}
         <div className="glass-card-elevated p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
           <div>
             <span className="text-sm text-muted-foreground">{technology}</span>
             <span className="mx-2 text-border">|</span>
-            <span className="text-sm font-medium">{difficulty}</span>
+            <span className="text-sm font-medium text-card-foreground">{difficulty}</span>
           </div>
-          <div className={`flex items-center gap-2 font-mono text-lg font-semibold ${isLowTime ? "text-destructive" : ""}`}>
+          <div className={`flex items-center gap-2 font-mono text-lg font-semibold ${isLowTime ? "text-destructive" : "text-card-foreground"}`}>
             <Clock className="h-4 w-4" />
             {formatTime(timeLeft)}
           </div>
@@ -130,10 +137,10 @@ const TestPage = () => {
             key={currentQuestion}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="glass-card-elevated p-8"
+            className="bg-gray-700/50 backdrop-blur-md p-8 rounded-xl shadow-lg"
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold">
+              <span className="px-3 py-1 rounded-full bg-accent/10 text-card-foreground text-xs font-semibold">
                 {q.type === "mcq" ? "Multiple Choice" : q.type === "scenario" ? "Scenario" : "Conceptual"}
               </span>
               <span className="text-sm text-muted-foreground">
@@ -141,7 +148,7 @@ const TestPage = () => {
               </span>
             </div>
 
-            <h2 className="text-xl font-display font-semibold mb-6 leading-relaxed">
+            <h2 className="text-xl font-display font-semibold mb-6 leading-relaxed text-card-foreground">
               {q.question}
             </h2>
 
@@ -152,8 +159,8 @@ const TestPage = () => {
                   onClick={() => setAnswers({ ...answers, [q.id]: idx })}
                   className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
                     answers[q.id] === idx
-                      ? "border-accent bg-accent/5"
-                      : "border-border hover:border-accent/30 hover:bg-secondary/50"
+                      ? "border-accent bg-accent/5 text-card-foreground" // Keep text white when selected
+                      : "border-gray-700 hover:border-accent/30 hover:bg-gray-800 text-muted-foreground" // Adjust non-selected text
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -161,7 +168,7 @@ const TestPage = () => {
                       className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold border-2 ${
                         answers[q.id] === idx
                           ? "border-accent bg-accent text-accent-foreground"
-                          : "border-border text-muted-foreground"
+                          : "border-gray-700 text-muted-foreground" // Adjust non-selected text
                       }`}
                     >
                       {String.fromCharCode(65 + idx)}
@@ -178,7 +185,7 @@ const TestPage = () => {
                 variant="outline"
                 onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
                 disabled={currentQuestion === 0}
-                className="rounded-xl"
+                className="rounded-xl border-gray-700 text-muted-foreground hover:bg-gray-800 hover:text-card-foreground"
               >
                 <ChevronLeft className="h-4 w-4 mr-1" /> Previous
               </Button>
@@ -186,14 +193,14 @@ const TestPage = () => {
               {currentQuestion < questions.length - 1 ? (
                 <Button
                   onClick={() => setCurrentQuestion(currentQuestion + 1)}
-                  className="bg-accent text-accent-foreground hover:bg-accent/90 rounded-xl"
+                  className="bg-[#06B6D4] text-white hover:bg-[#0891B2] rounded-xl shadow-[0_10px_30px_rgba(59,130,246,0.4)]"
                 >
                   Next <ChevronRight className="h-4 w-4 ml-1" />
                 </Button>
               ) : (
                 <Button
                   onClick={() => setShowSubmitDialog(true)}
-                  className="bg-success text-success-foreground hover:bg-success/90 rounded-xl"
+                  className="bg-[#06B6D4] text-white hover:bg-[#0891B2] rounded-xl shadow-[0_10px_30px_rgba(59,130,246,0.4)]"
                 >
                   Submit Test
                 </Button>
@@ -202,8 +209,8 @@ const TestPage = () => {
           </motion.div>
 
           {/* Question nav panel */}
-          <div className="glass-card p-4">
-            <h3 className="font-display font-semibold text-sm mb-3">Questions</h3>
+          <div className="bg-gray-700/50 backdrop-blur-md p-4 rounded-xl shadow-lg">
+            <h3 className="font-display font-semibold text-sm mb-3 text-card-foreground">Questions</h3>
             <div className="grid grid-cols-5 gap-2">
               {questions.map((_, i) => (
                 <button
@@ -213,19 +220,19 @@ const TestPage = () => {
                     i === currentQuestion
                       ? "bg-accent text-accent-foreground"
                       : answers[questions[i].id] !== undefined
-                      ? "bg-accent/15 text-accent border border-accent/30"
-                      : "bg-secondary text-muted-foreground"
+                      ? "bg-accent/15 text-card-foreground border border-accent/30"
+                      : "bg-gray-800 text-muted-foreground" // Adjust non-answered, non-selected
                   }`}
                 >
                   {i + 1}
                 </button>
               ))}
             </div>
-            <div className="mt-4 pt-4 border-t border-border">
+            <div className="mt-4 pt-4 border-t border-gray-700">
               <Button
                 onClick={() => setShowSubmitDialog(true)}
                 variant="outline"
-                className="w-full rounded-xl border-success text-success hover:bg-success hover:text-success-foreground"
+                className="w-full rounded-xl border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white"
               >
                 Submit Test
               </Button>
@@ -236,13 +243,13 @@ const TestPage = () => {
 
       {/* Submit dialog */}
       <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
-        <AlertDialogContent>
+        <AlertDialogContent className="bg-gray-900 text-white border-gray-700">
           <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center gap-2">
+            <AlertDialogTitle className="flex items-center gap-2 text-white">
               <AlertTriangle className="h-5 w-5 text-warning" />
               Submit Test?
             </AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogDescription className="text-gray-200">
               You have answered {answeredCount} out of {questions.length} questions.
               {answeredCount < questions.length && (
                 <span className="block mt-2 text-destructive font-medium">
@@ -252,15 +259,15 @@ const TestPage = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Continue Test</AlertDialogCancel>
-            <AlertDialogAction onClick={handleSubmit} className="bg-success text-success-foreground hover:bg-success/90">
+            <AlertDialogCancel className="border-gray-700 text-muted-foreground hover:bg-gray-800 hover:text-card-foreground">Continue Test</AlertDialogCancel>
+            <AlertDialogAction onClick={handleSubmit} className="bg-[#06B6D4] text-white hover:bg-[#0891B2]">
               Submit
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
-  );
+ );
 };
 
 export default TestPage;
