@@ -259,7 +259,7 @@ const TestPage = () => {
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="border-gray-700 text-muted-foreground hover:bg-gray-800 hover:text-card-foreground">Continue Test</AlertDialogCancel>
+            <AlertDialogCancel className="border-gray-700 text-muted-foreground hover:bg-gray-400 hover:text-card-foreground">Continue Test</AlertDialogCancel>
             <AlertDialogAction onClick={handleSubmit} className="bg-[#06B6D4] text-white hover:bg-[#0891B2]">
               Submit
             </AlertDialogAction>
