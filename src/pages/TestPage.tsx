@@ -124,7 +124,7 @@ const TestPage = () => {
 
         {/* Progress */}
         <div className="mb-6">
-          <div className="flex justify-between text-sm text-muted-foreground mb-2">
+          <div className="flex justify-between text-sm text-white mb-2">
             <span>{answeredCount} of {questions.length} answered</span>
             <span>{Math.round(progress)}%</span>
           </div>
@@ -137,13 +137,13 @@ const TestPage = () => {
             key={currentQuestion}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gray-700/50 backdrop-blur-md p-8 rounded-xl shadow-lg"
+            className="bg-gray-100/50 backdrop-blur-md p-8 rounded-xl shadow-lg"
           >
             <div className="flex items-center gap-2 mb-4">
               <span className="px-3 py-1 rounded-full bg-accent/10 text-card-foreground text-xs font-semibold">
                 {q.type === "mcq" ? "Multiple Choice" : q.type === "scenario" ? "Scenario" : "Conceptual"}
               </span>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-sm text-white-foreground">
                 Question {currentQuestion + 1} of {questions.length}
               </span>
             </div>
@@ -160,7 +160,7 @@ const TestPage = () => {
                   className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
                     answers[q.id] === idx
                       ? "border-accent bg-accent/5 text-card-foreground" // Keep text white when selected
-                      : "border-gray-700 hover:border-accent/30 hover:bg-gray-800 text-muted-foreground" // Adjust non-selected text
+                      : "border-gray-700 hover:border-accent/30 hover:bg-gray-100 text-black/50-foreground" // Adjust non-selected text
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -168,7 +168,7 @@ const TestPage = () => {
                       className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold border-2 ${
                         answers[q.id] === idx
                           ? "border-accent bg-accent text-accent-foreground"
-                          : "border-gray-700 text-muted-foreground" // Adjust non-selected text
+                          : "border-gray-700 text-bg-black/50-foreground" // Adjust non-selected text
                       }`}
                     >
                       {String.fromCharCode(65 + idx)}
@@ -185,7 +185,7 @@ const TestPage = () => {
                 variant="outline"
                 onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
                 disabled={currentQuestion === 0}
-                className="rounded-xl border-gray-700 text-muted-foreground hover:bg-gray-800 hover:text-card-foreground"
+                className="rounded-xl border-gray-100 text-muted-foreground hover:bg-gray-800 hover:text-card-foreground"
               >
                 <ChevronLeft className="h-4 w-4 mr-1" /> Previous
               </Button>
@@ -209,7 +209,7 @@ const TestPage = () => {
           </motion.div>
 
           {/* Question nav panel */}
-          <div className="bg-gray-700/50 backdrop-blur-md p-4 rounded-xl shadow-lg">
+          <div className="bg-gray-100/50 backdrop-blur-md p-4 rounded-xl shadow-lg">
             <h3 className="font-display font-semibold text-sm mb-3 text-card-foreground">Questions</h3>
             <div className="grid grid-cols-5 gap-2">
               {questions.map((_, i) => (
@@ -228,7 +228,7 @@ const TestPage = () => {
                 </button>
               ))}
             </div>
-            <div className="mt-4 pt-4 border-t border-gray-700">
+            <div className="mt-4 pt-4 border-t border-gray-100">
               <Button
                 onClick={() => setShowSubmitDialog(true)}
                 variant="outline"
@@ -243,13 +243,13 @@ const TestPage = () => {
 
       {/* Submit dialog */}
       <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
-        <AlertDialogContent className="bg-gray-900 text-white border-gray-700">
+        <AlertDialogContent className="bg-gray-100 text-black/50-foreground border-gray-100">
           <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center gap-2 text-white">
+            <AlertDialogTitle className="flex items-center gap-2 text-black/50-foreground">
               <AlertTriangle className="h-5 w-5 text-warning" />
               Submit Test?
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-gray-200">
+            <AlertDialogDescription className="text-black/50-foreground">
               You have answered {answeredCount} out of {questions.length} questions.
               {answeredCount < questions.length && (
                 <span className="block mt-2 text-destructive font-medium">
