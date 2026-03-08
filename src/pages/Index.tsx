@@ -6,7 +6,7 @@ import heroBg from "@/assets/hero-bg.jpg";
 
 const features = [
   { icon: Brain, title: "AI-Generated Questions", description: "Smart questions tailored to your chosen technology and skill level" },
-  { icon: Clock, title: "Timed Assessments", description: "60-minute tests that simulate real certification exams" },
+  { icon: Clock, title: "Timed Assessments", description: "30-minute tests that simulate real certification exams" },
   { icon: Award, title: "Instant Results", description: "Get your score, performance analysis, and AI feedback immediately" },
   { icon: CheckCircle, title: "10+ Technologies", description: "From Java and Python to React and SQL — test what matters" },
 ];

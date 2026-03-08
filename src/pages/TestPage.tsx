@@ -21,7 +21,7 @@ import {
   type TestResult,
 } from "@/lib/questionUtils";
 
-const TOTAL_TIME = 60 * 60; // 60 minutes in seconds
+const TOTAL_TIME = 30 * 60; // 30 minutes in seconds
 
 const TestPage = () => {
   const [searchParams] = useSearchParams();
