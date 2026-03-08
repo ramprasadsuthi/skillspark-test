@@ -25,7 +25,7 @@ const SelectTechnology = () => {
   };
 
   return (
-    <div className="min-h-screen pt-24 pb-12"
+    <div className="min-h-screen pt-20 pb-12"
           style={{
             backgroundImage: `url(${bg1})`,
             backgroundSize: 'cover',
@@ -64,10 +64,17 @@ const SelectTechnology = () => {
                     {technologies.map((tech) => (
                       <div
                         key={tech.name}
-                        onClick={() => setSelectedTech(tech.name)}
-                        className={`tech-card ${selectedTech === tech.name ? "selected" : ""}`}
+                        onClick={() => tech.status !== "coming-soon" && setSelectedTech(tech.name)}
+                        className={`tech-card ${selectedTech === tech.name ? "selected" : ""} ${
+                          tech.status === "coming-soon" ? "grayscale pointer-events-none" : ""
+                        }`}
                         style={{ backgroundImage: tech.background }}
                       >
+                        {tech.status === "coming-soon" && (
+                          <div className="absolute top-2 right-2 bg-gray-900 text-white text-xs font-bold px-2 py-1 rounded-full">
+                            Coming Soon
+                          </div>
+                        )}
                         <span className="text-3xl mb-3 block">{tech.icon}</span>
                         <h3 className="font-display font-semibold mb-1 text-card-foreground">{tech.name}</h3>
                         <p className="text-sm text-muted-foreground">{tech.description}</p>
@@ -114,7 +121,7 @@ const SelectTechnology = () => {
                         onClick={() => setSelectedDifficulty(diff.name)}
                         className={`glass tech-card flex items-center gap-4 ${selectedDifficulty === diff.name ? "selected" : ""}`}
                       >
-                        <div className={`px-4 py-2 rounded-full text-lg font-semibold ${diff.color}`}>
+                        <div className={`px-4 py-2 rounded-full text-base font-semibold ${diff.color}`}>
                           {diff.name}
                         </div>
                         <p className={`text-base ${

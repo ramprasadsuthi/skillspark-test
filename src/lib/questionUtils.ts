@@ -35,7 +35,7 @@ export interface TestResult {
   timeTaken: number;
 }
 
-export const technologies: { name: Technology; icon: string; description: string; background: string }[] = [
+export const technologies: { name: Technology; icon: string; description: string; background: string; status?: "ready" | "coming-soon" }[] = [
   {
     name: "Core Java",
     icon: "☕",
@@ -71,30 +71,35 @@ export const technologies: { name: Technology; icon: string; description: string
     icon: "🗄️",
     description: "Queries, joins, normalization, and optimization",
     background: "linear-gradient(to right, #c8e6c9, #aed581)",
+    status: "coming-soon",
   },
   {
     name: "HTML",
     icon: "📄",
     description: "Elements, forms, semantics, and accessibility",
     background: "linear-gradient(to right, #bbdefb, #90caf9)",
+    status: "coming-soon",
   },
   {
     name: "CSS",
     icon: "🎨",
     description: "Layouts, flexbox, grid, animations, and responsive design",
     background: "linear-gradient(to right, #ffecb3, #ffe082)",
+    status: "coming-soon",
   },
   {
     name: "JavaScript",
     icon: "⚡",
     description: "ES6+, DOM, async programming, and closures",
     background: "linear-gradient(to right, #b2dfdb, #80cbc4)",
+    status: "coming-soon",
   },
   {
     name: "React",
     icon: "⚛️",
     description: "Components, hooks, state management, and routing",
     background: "linear-gradient(to right, #cfd8dc, #b0bec5)",
+    status: "coming-soon",
   },
 ];
 
