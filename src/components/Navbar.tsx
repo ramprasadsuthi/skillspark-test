@@ -14,10 +14,10 @@ const Navbar = () => {
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 text-white">
           <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
-            <span className="font-display font-bold text-accent-foreground text-sm">IT</span>
+            <span className="font-display font-bold text-accent-foreground text-sm">MX</span>
           </div>
           <span className="font-display font-semibold text-lg tracking-tight text-white">
-            TechTest
+            Talent Test
           </span>
         </Link>
         <div className="flex items-center gap-4">
