@@ -90,7 +90,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="border-t border-border py-8">
         <div className="container mx-auto px-6 text-center text-sm text-muted-foreground">
-          © 2026 MX InfoTech Talent Test — AI-Powered IT Assessment Platform
+          © 2026 MX Infotech — AI-Powered IT Assessment Platform
         </div>
       </footer>
     </div>
