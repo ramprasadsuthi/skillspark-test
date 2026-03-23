@@ -1,4 +1,4 @@
-import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions, sql_testQuestions, htmlQuestions, javaScriptQuestions, cssQuestions, reactQuestions } from "./questions";
+import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions, sql_testQuestions, htmlQuestions, javaScriptQuestions, cssQuestions, reactQuestions, aptitudeQuestions, reasoningQuestions } from "./questions";
 
 export type Technology =
   | "Core Java"
@@ -104,14 +104,12 @@ export const technologies: { name: Technology; icon: string; description: string
   icon: "📊",
   description: "Quantitative aptitude, arithmetic, data interpretation, and problem-solving",
   background: "linear-gradient(to right, #e3f2fd, #bbdefb)",
-  status: "coming-soon",
 },
 {
   name: "Reasoning",
   icon: "🧠",
   description: "Logical reasoning, puzzles, patterns, and analytical thinking",
   background: "linear-gradient(to right, #ede7f6, #d1c4e9)",
-  status: "coming-soon",
 }
 ];
 
@@ -126,7 +124,9 @@ const questionBanks: Record<string, Question[]> = {
   ...htmlQuestions,
   ...javaScriptQuestions,
   ...cssQuestions,
-  ...reactQuestions
+  ...reactQuestions,
+  ...aptitudeQuestions,
+  ...reasoningQuestions,
 };
 
 // Generate questions for any tech/difficulty combo by reusing and adapting the bank
