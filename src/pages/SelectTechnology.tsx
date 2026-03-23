@@ -49,7 +49,8 @@ const SelectTechnology = () => {
                 >
                   <h1 className="text-3xl md:text-4xl font-display font-bold mb-2 text-white">Choose Your Technology</h1>
                   <p className="text-gray-200 mb-8">Select the technology you want to be tested on</p>
-                  <div className="mb-8 flex justify-end">
+                  
+                  <div className="mb-6 flex justify-end">
                     <Button
                       onClick={() => setStep(2)}
                       disabled={!selectedTech}
@@ -59,8 +60,8 @@ const SelectTechnology = () => {
                       Next <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
-    
-                  <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {technologies.map((tech) => (
                       <div
                         key={tech.name}

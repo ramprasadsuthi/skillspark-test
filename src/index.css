@@ -132,7 +132,7 @@
   }
 
   .tech-card.selected {
-    @apply border-2 border-primary bg-white;
+    @apply border-8 border-white/80 scale-[1.05];
     box-shadow: var(--shadow-elevated);
   }
 

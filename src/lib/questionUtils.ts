@@ -1,4 +1,4 @@
-import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions, sql_testQuestions } from "./questions";
+import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions, sql_testQuestions, htmlQuestions, javaScriptQuestions, cssQuestions, reactQuestions } from "./questions";
 
 export type Technology =
   | "Core Java"
@@ -10,7 +10,9 @@ export type Technology =
   | "HTML"
   | "CSS"
   | "JavaScript"
-  | "React";
+  | "React"
+  | "Aptitude"
+  | "Reasoning";
 
 export type Difficulty = "Beginner" | "Intermediate" | "Advanced";
 
@@ -71,36 +73,46 @@ export const technologies: { name: Technology; icon: string; description: string
     icon: "🗄️",
     description: "Queries, joins, normalization, and optimization",
     background: "linear-gradient(to right, #c8e6c9, #aed581)",
-   // status: "coming-soon",
   },
   {
     name: "HTML",
     icon: "📄",
     description: "Elements, forms, semantics, and accessibility",
     background: "linear-gradient(to right, #bbdefb, #90caf9)",
-    status: "coming-soon",
   },
   {
     name: "CSS",
     icon: "🎨",
     description: "Layouts, flexbox, grid, animations, and responsive design",
     background: "linear-gradient(to right, #ffecb3, #ffe082)",
-    status: "coming-soon",
   },
   {
     name: "JavaScript",
     icon: "⚡",
     description: "ES6+, DOM, async programming, and closures",
     background: "linear-gradient(to right, #b2dfdb, #80cbc4)",
-    status: "coming-soon",
-  },
+   },
   {
     name: "React",
     icon: "⚛️",
     description: "Components, hooks, state management, and routing",
     background: "linear-gradient(to right, #cfd8dc, #b0bec5)",
-    status: "coming-soon",
+    //status: "coming-soon",
   },
+  {
+  name: "Aptitude",
+  icon: "📊",
+  description: "Quantitative aptitude, arithmetic, data interpretation, and problem-solving",
+  background: "linear-gradient(to right, #e3f2fd, #bbdefb)",
+  status: "coming-soon",
+},
+{
+  name: "Reasoning",
+  icon: "🧠",
+  description: "Logical reasoning, puzzles, patterns, and analytical thinking",
+  background: "linear-gradient(to right, #ede7f6, #d1c4e9)",
+  status: "coming-soon",
+}
 ];
 
 // Mock question bank - in production these would come from AI
@@ -111,6 +123,10 @@ const questionBanks: Record<string, Question[]> = {
   ...automation_testingQuestions,
   ...seleniumQuestions,
   ...sql_testQuestions,
+  ...htmlQuestions,
+  ...javaScriptQuestions,
+  ...cssQuestions,
+  ...reactQuestions
 };
 
 // Generate questions for any tech/difficulty combo by reusing and adapting the bank
