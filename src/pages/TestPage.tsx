@@ -21,7 +21,7 @@ import {
   type TestResult,
 } from "@/lib/questionUtils";
 
-const TOTAL_TIME = 30 * 60; // 30 minutes in seconds
+const TOTAL_TIME = 20 * 60;
 
 const TestPage = () => {
   const [searchParams] = useSearchParams();
@@ -29,7 +29,9 @@ const TestPage = () => {
   const technology = searchParams.get("tech") as Technology;
   const difficulty = searchParams.get("difficulty") as Difficulty;
 
-  const [questions] = useState(() => generateMockQuestions(technology, difficulty));
+  const [questions] = useState(() =>
+    generateMockQuestions(technology, difficulty)
+  );
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [timeLeft, setTimeLeft] = useState(TOTAL_TIME);
@@ -48,7 +50,6 @@ const TestPage = () => {
       });
     }, 1000);
     return () => clearInterval(interval);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Prevent accidental close
@@ -86,7 +87,9 @@ const TestPage = () => {
   const formatTime = (seconds: number) => {
     const m = Math.floor(seconds / 60);
     const s = seconds % 60;
-    return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
+    return `${m.toString().padStart(2, "0")}:${s
+      .toString()
+      .padStart(2, "0")}`;
   };
 
   const q = questions[currentQuestion];
@@ -100,23 +103,20 @@ const TestPage = () => {
   }
 
   return (
-    <div className="min-h-screen pt-20 pb-8 relative z-0"
-      style={{
-        backgroundImage: `url('https://images.unsplash.com/photo-1542831371-d35d03893358?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}>
-      {/* Overlay to darken background image and improve text readability */}
-      <div className="absolute inset-0 bg-black/50 z-[-1]" />
-      <div className="container mx-auto px-4 max-w-5xl relative z-10">
+    <div className="min-h-screen pt-20 pb-8 bg-[#0F172A] text-[#E2E8F0]">
+      <div className="container mx-auto px-4 max-w-5xl">
+
         {/* Top bar */}
-        <div className="glass-card-elevated p-4 mb-6 flex flex-wrap items-center justify-between gap-4">
+        <div className="bg-[#1E293B]/80 backdrop-blur-lg border border-[#334155] p-4 mb-6 rounded-xl flex flex-wrap items-center justify-between gap-4 shadow-lg">
           <div>
-            <span className="text-sm text-muted-foreground">{technology}</span>
-            <span className="mx-2 text-border">|</span>
-            <span className="text-sm font-medium text-card-foreground">{difficulty}</span>
+            <span className="text-sm text-[#94A3B8]">{technology}</span>
+            <span className="mx-2 text-[#334155]">|</span>
+            <span className="text-sm font-medium">{difficulty}</span>
           </div>
-          <div className={`flex items-center gap-2 font-mono text-lg font-semibold ${isLowTime ? "text-destructive" : "text-card-foreground"}`}>
+
+          <div className={`flex items-center gap-2 font-mono text-lg font-semibold ${
+            isLowTime ? "text-red-400" : "text-[#E2E8F0]"
+          }`}>
             <Clock className="h-4 w-4" />
             {formatTime(timeLeft)}
           </div>
@@ -124,7 +124,7 @@ const TestPage = () => {
 
         {/* Progress */}
         <div className="mb-6">
-          <div className="flex justify-between text-sm text-white mb-2">
+          <div className="flex justify-between text-sm mb-2 text-[#94A3B8]">
             <span>{answeredCount} of {questions.length} answered</span>
             <span>{Math.round(progress)}%</span>
           </div>
@@ -132,23 +132,24 @@ const TestPage = () => {
         </div>
 
         <div className="grid lg:grid-cols-[1fr_240px] gap-6">
-          {/* Question */}
+
+          {/* Question Card */}
           <motion.div
             key={currentQuestion}
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="bg-gray-100/50 backdrop-blur-md p-8 rounded-xl shadow-lg"
+            className="bg-[#1E293B]/80 backdrop-blur-lg border border-[#334155] p-8 rounded-xl shadow-[0_0_20px_rgba(99,102,241,0.3)]"
           >
             <div className="flex items-center gap-2 mb-4">
-              <span className="px-3 py-1 rounded-full bg-accent/10 text-card-foreground text-xs font-semibold">
+              <span className="px-3 py-1 rounded-full bg-[#6366F1]/10 text-[#6366F1] text-xs font-semibold">
                 {q.type === "mcq" ? "Multiple Choice" : q.type === "scenario" ? "Scenario" : "Conceptual"}
               </span>
-              <span className="text-sm text-white-foreground">
+              <span className="text-sm text-[#94A3B8]">
                 Question {currentQuestion + 1} of {questions.length}
               </span>
             </div>
 
-            <h2 className="text-xl font-display font-semibold mb-6 leading-relaxed text-card-foreground">
+            <h2 className="text-xl font-semibold mb-6 leading-relaxed">
               {q.question}
             </h2>
 
@@ -159,21 +160,21 @@ const TestPage = () => {
                   onClick={() => setAnswers({ ...answers, [q.id]: idx })}
                   className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
                     answers[q.id] === idx
-                      ? "border-accent bg-accent/5 text-card-foreground" // Keep text white when selected
-                      : "border-gray-700 hover:border-accent/30 hover:bg-gray-100 text-black/50-foreground" // Adjust non-selected text
+                      ? "border-[#6366F1] bg-[#6366F1]/10 text-white"
+                      : "border-[#334155] hover:border-[#6366F1]/40 hover:bg-[#1E293B] text-[#94A3B8]"
                   }`}
                 >
                   <div className="flex items-start gap-3">
                     <span
-                      className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold border-2 ${
+                      className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold border-2 ${
                         answers[q.id] === idx
-                          ? "border-accent bg-accent text-accent-foreground"
-                          : "border-gray-700 text-bg-black/50-foreground" // Adjust non-selected text
+                          ? "border-[#6366F1] bg-[#6366F1] text-white"
+                          : "border-[#334155] text-[#94A3B8]"
                       }`}
                     >
                       {String.fromCharCode(65 + idx)}
                     </span>
-                    <span className="text-sm leading-relaxed pt-0.5">{option}</span>
+                    <span className="text-sm">{option}</span>
                   </div>
                 </button>
               ))}
@@ -185,7 +186,7 @@ const TestPage = () => {
                 variant="outline"
                 onClick={() => setCurrentQuestion(Math.max(0, currentQuestion - 1))}
                 disabled={currentQuestion === 0}
-                className="rounded-xl border-gray-100 text-muted-foreground hover:bg-gray-800 hover:text-card-foreground"
+                className="rounded-xl border-[#334155] text-[#94A3B8] hover:bg-[#1E293B]"
               >
                 <ChevronLeft className="h-4 w-4 mr-1" /> Previous
               </Button>
@@ -193,14 +194,14 @@ const TestPage = () => {
               {currentQuestion < questions.length - 1 ? (
                 <Button
                   onClick={() => setCurrentQuestion(currentQuestion + 1)}
-                  className="bg-[#06B6D4] text-white hover:bg-[#0891B2] rounded-xl shadow-[0_10px_30px_rgba(59,130,246,0.4)]"
+                  className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-xl shadow-lg"
                 >
                   Next <ChevronRight className="h-4 w-4 ml-1" />
                 </Button>
               ) : (
                 <Button
                   onClick={() => setShowSubmitDialog(true)}
-                  className="bg-[#06B6D4] text-white hover:bg-[#0891B2] rounded-xl shadow-[0_10px_30px_rgba(59,130,246,0.4)]"
+                  className="bg-[#6366F1] hover:bg-[#4F46E5] text-white rounded-xl shadow-lg"
                 >
                   Submit Test
                 </Button>
@@ -208,31 +209,32 @@ const TestPage = () => {
             </div>
           </motion.div>
 
-          {/* Question nav panel */}
-          <div className="bg-gray-100/50 backdrop-blur-md p-4 rounded-xl shadow-lg">
-            <h3 className="font-display font-semibold text-sm mb-3 text-card-foreground">Questions</h3>
+          {/* Side Panel */}
+          <div className="bg-[#1E293B]/80 border border-[#334155] p-4 rounded-xl shadow-lg">
+            <h3 className="font-semibold text-sm mb-3">Questions</h3>
+
             <div className="grid grid-cols-5 gap-2">
               {questions.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentQuestion(i)}
-                  className={`w-full aspect-square rounded-lg text-xs font-semibold flex items-center justify-center transition-all ${
+                  className={`aspect-square rounded-lg text-xs font-semibold flex items-center justify-center ${
                     i === currentQuestion
-                      ? "bg-accent text-accent-foreground"
+                      ? "bg-[#6366F1] text-white"
                       : answers[questions[i].id] !== undefined
-                      ? "bg-accent/15 text-card-foreground border border-accent/30"
-                      : "bg-gray-800 text-muted-foreground" // Adjust non-answered, non-selected
+                      ? "bg-[#22D3EE]/20 border border-[#22D3EE] text-white"
+                      : "bg-[#0F172A] text-[#94A3B8]"
                   }`}
                 >
                   {i + 1}
                 </button>
               ))}
             </div>
-            <div className="mt-4 pt-4 border-t border-gray-100">
+
+            <div className="mt-4 pt-4 border-t border-[#334155]">
               <Button
                 onClick={() => setShowSubmitDialog(true)}
-                variant="outline"
-                className="w-full rounded-xl border-[#06B6D4] text-[#06B6D4] hover:bg-[#06B6D4] hover:text-white"
+                className="w-full rounded-xl border border-[#6366F1] text-[#6366F1] hover:bg-[#6366F1] hover:text-white"
               >
                 Submit Test
               </Button>
@@ -241,33 +243,40 @@ const TestPage = () => {
         </div>
       </div>
 
-      {/* Submit dialog */}
+      {/* Dialog */}
       <AlertDialog open={showSubmitDialog} onOpenChange={setShowSubmitDialog}>
-        <AlertDialogContent className="bg-gray-100 text-black/50-foreground border-gray-100">
+        <AlertDialogContent className="bg-[#1E293B] text-[#E2E8F0] border-[#334155]">
           <AlertDialogHeader>
-            <AlertDialogTitle className="flex items-center gap-2 text-black/50-foreground">
-              <AlertTriangle className="h-5 w-5 text-warning" />
+            <AlertDialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-yellow-400" />
               Submit Test?
             </AlertDialogTitle>
-            <AlertDialogDescription className="text-black/50-foreground">
-              You have answered {answeredCount} out of {questions.length} questions.
+
+            <AlertDialogDescription>
+              You answered {answeredCount} / {questions.length}
               {answeredCount < questions.length && (
-                <span className="block mt-2 text-destructive font-medium">
-                  {questions.length - answeredCount} questions are unanswered and will be marked wrong.
+                <span className="block mt-2 text-red-400">
+                  {questions.length - answeredCount} unanswered
                 </span>
               )}
             </AlertDialogDescription>
           </AlertDialogHeader>
+
           <AlertDialogFooter>
-            <AlertDialogCancel className="border-gray-700 text-muted-foreground hover:bg-gray-400 hover:text-card-foreground">Continue Test</AlertDialogCancel>
-            <AlertDialogAction onClick={handleSubmit} className="bg-[#06B6D4] text-white hover:bg-[#0891B2]">
+            <AlertDialogCancel className="border-[#334155] text-[#94A3B8] hover:bg-[#1E293B]">
+              Continue
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleSubmit}
+              className="bg-[#6366F1] hover:bg-[#4F46E5]"
+            >
               Submit
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
     </div>
- );
+  );
 };
 
 export default TestPage;
