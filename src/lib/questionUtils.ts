@@ -1,4 +1,4 @@
-import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions } from "./questions";
+import { javaQuestions, pythonQuestions, manualTestingQuestions, automation_testingQuestions, seleniumQuestions, sql_testQuestions } from "./questions";
 
 export type Technology =
   | "Core Java"
@@ -71,7 +71,7 @@ export const technologies: { name: Technology; icon: string; description: string
     icon: "🗄️",
     description: "Queries, joins, normalization, and optimization",
     background: "linear-gradient(to right, #c8e6c9, #aed581)",
-    status: "coming-soon",
+   // status: "coming-soon",
   },
   {
     name: "HTML",
@@ -110,6 +110,7 @@ const questionBanks: Record<string, Question[]> = {
   ...manualTestingQuestions,
   ...automation_testingQuestions,
   ...seleniumQuestions,
+  ...sql_testQuestions,
 };
 
 // Generate questions for any tech/difficulty combo by reusing and adapting the bank

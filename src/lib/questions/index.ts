@@ -3,3 +3,7 @@ export * from "./python";
 export * from "./manual-testing";
 export * from "./automation-testing";
 export * from "./selenium";
+export * from "./sql-test";
+//export * from "./html-css";
+//export * from "./javascript";
+//export * from "./react";
