@@ -1,3 +1,4 @@
+export type { Question, Technology, Difficulty } from "../questionUtils";
 export * from "./java";
 export * from "./python";
 export * from "./manual-testing";
