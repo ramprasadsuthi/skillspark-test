@@ -1,6 +1,7 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowRight, Brain, Clock, Award, CheckCircle } from "lucide-react";
+import { ArrowRight, Brain, Clock, Award, CheckCircle, Users, ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
 
@@ -12,6 +13,26 @@ const features = [
 ];
 
 const Index = () => {
+  const [visitorCount, setVisitorCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    const incrementVisitorCount = async () => {
+      try {
+        const response = await fetch(
+          "https://countapi.mileshilliard.com/api/v1/hit/mxinfotech_skillspark_visits"
+        );
+        if (response.ok) {
+          const data = await response.json();
+          setVisitorCount(data.value);
+        }
+      } catch (error) {
+        console.error("Visitor count fetch failed:", error);
+      }
+    };
+
+    incrementVisitorCount();
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero */}
@@ -44,6 +65,15 @@ const Index = () => {
                 <Link to="/select">
                   Start Test <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="border-accent/50 text-accent hover:bg-accent/10 text-base px-8 h-12 rounded-xl font-semibold shadow-lg backdrop-blur-sm">
+                <a
+                  href={`${window.location.origin}${window.location.pathname.replace(/\/index\.html$/, '').replace(/#.*$/, '')}/playwright-playground.html`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Playwright Playground <ExternalLink className="ml-2 h-5 w-5" />
+                </a>
               </Button>
             </div>
           </motion.div>
@@ -88,9 +118,24 @@ const Index = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border py-8">
-        <div className="container mx-auto px-6 text-center text-sm text-muted-foreground">
-          © 2026 MX Infotech — AI-Powered IT Assessment Platform
+      <footer className="border-t border-border py-12">
+        <div className="container mx-auto px-6 flex flex-col items-center gap-6">
+          <div className="flex flex-wrap justify-center gap-4">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent/5 border border-accent/10"
+            >
+              <Users className="h-4 w-4 text-accent" />
+              <span className="text-sm font-medium text-muted-foreground">
+                Visitors: <span className="text-primary font-bold">{visitorCount !== null ? visitorCount.toLocaleString() : "..."}</span>
+              </span>
+            </motion.div>
+          </div>
+          
+          <div className="text-center text-sm text-muted-foreground">
+            © 2026 MX Infotech — AI-Powered IT Assessment Platform
+          </div>
         </div>
       </footer>
     </div>

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast";
 
-const PASSWORD = "root#123";
+const PASSWORD = "admin";
 const SESSION_STORAGE_KEY = "admin_authenticated";
 
 interface PasswordProtectProps {

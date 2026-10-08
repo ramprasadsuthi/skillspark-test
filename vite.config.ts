@@ -7,12 +7,27 @@ export default defineConfig(({ mode }) => ({
   base: "/",
 
   server: {
-    host: "::",
-    port: 8080,
-    hmr: {
-      overlay: false,
+  host: true, // ✅ IMPORTANT (instead of localhost / 127.0.0.1)
+  port: 8080,
+
+  proxy: {
+    "/api": {
+      target: "https://api.counterapi.dev",
+      changeOrigin: true,
+      secure: false,
+
+      // ✅ VERY IMPORTANT
+      rewrite: (path) => path.replace(/^\/api/, ""),
+
+      // ✅ force proxy logging
+      configure: (proxy) => {
+        proxy.on("proxyReq", (proxyReq, req) => {
+          console.log("👉 Proxy HIT:", req.url);
+        });
+      },
     },
   },
+},
 
   plugins: [
     react(),
